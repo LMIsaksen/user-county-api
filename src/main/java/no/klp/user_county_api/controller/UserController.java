@@ -6,6 +6,8 @@ import no.klp.user_county_api.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,5 +31,10 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getUsers(@RequestParam(required = false) String type) {
+        return ResponseEntity.ok(userService.getUsers(type));
     }
 }

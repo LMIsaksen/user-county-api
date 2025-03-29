@@ -5,6 +5,8 @@ import no.klp.user_county_api.model.User;
 import no.klp.user_county_api.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -20,6 +22,14 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public List<User> getUsers(String type) {
+        if (type == null) {
+            return userRepository.findAll();
+        } else {
+            return userRepository.findByType(type);
+        }
     }
 }
 
